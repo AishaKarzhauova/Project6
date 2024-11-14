@@ -17,8 +17,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // create window
         window = UIWindow(windowScene: windowScene)
         
-        // initialize  MainViewController
-        let mainViewController = MainViewController()
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 16
+                
+        // Initialize MainViewController with the layout
+        let mainViewController = MainViewController(collectionViewLayout: layout)
         
         // wrap MainViewController in UINavigationController
         let navigationController = UINavigationController(rootViewController: mainViewController)

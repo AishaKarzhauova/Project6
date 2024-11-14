@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+// ActorDetail model
+struct ActorDetail: Codable {
+    let name: String
+    let birthday: String?
+    let deathday: String?
+    let biography: String
+    let placeOfBirth: String?
+    let profilePath: String?
+}
+
