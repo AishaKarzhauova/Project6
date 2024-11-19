@@ -14,7 +14,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        // create window
+        // Configure global navigation bar appearance
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white // Set background to white
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.black] // Set title color
+        
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+        UINavigationBar.appearance().isTranslucent = false // Prevent transparency
+
+        // Create the main window
         window = UIWindow(windowScene: windowScene)
         
         let layout = UICollectionViewFlowLayout()
@@ -24,15 +35,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Initialize MainViewController with the layout
         let mainViewController = MainViewController(collectionViewLayout: layout)
         
-        // wrap MainViewController in UINavigationController
+        // Wrap MainViewController in UINavigationController
         let navigationController = UINavigationController(rootViewController: mainViewController)
         
-        // set UINavigationController as source controller
+        // Set UINavigationController as the root controller
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
-    // other func stay the same
     func sceneDidDisconnect(_ scene: UIScene) { }
     func sceneDidBecomeActive(_ scene: UIScene) { }
     func sceneWillResignActive(_ scene: UIScene) { }

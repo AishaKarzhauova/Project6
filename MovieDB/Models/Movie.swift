@@ -55,5 +55,6 @@ enum OriginalLanguage: String, Codable {
     case es = "es"
     case fr = "fr"
     case ja = "ja"
+    case ru = "ru"
 }
 

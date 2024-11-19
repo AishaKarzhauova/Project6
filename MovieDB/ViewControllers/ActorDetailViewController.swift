@@ -53,7 +53,7 @@ class ActorDetailViewController: UIViewController {
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.clipsToBounds = true
         profileImageView.layer.cornerRadius = 75
-        profileImageView.backgroundColor = .lightGray // Add background color to check visibility
+        profileImageView.backgroundColor = .lightGray
         contentView.addSubview(profileImageView)
         
         profileImageView.snp.makeConstraints { make in
@@ -107,8 +107,6 @@ class ActorDetailViewController: UIViewController {
     }
     
     private func fetchActorDetails() {
-        print("Fetching details for actor ID: \(actorID)")
-        
         NetworkingManager.shared.getActorDetails(actorID: actorID) { [weak self] actor in
             guard let self = self, let actor = actor else {
                 print("Failed to fetch actor details or actor data is nil.")
@@ -121,16 +119,12 @@ class ActorDetailViewController: UIViewController {
     }
     
     private func updateUI(with actor: ActorDetail) {
-        print("Updating UI with actor details")
         nameLabel.text = actor.name
         birthDateLabel.text = "Born: \(actor.birthday ?? "N/A")"
         placeOfBirthLabel.text = "Place of Birth: \(actor.placeOfBirth ?? "N/A")"
         bioLabel.text = actor.biography
         
-        // Load profile image if available
         if let profilePath = actor.profilePath {
-            print("Loading profile image from path: \(profilePath)")
-            let imagePath = "https://image.tmdb.org/t/p/w500" + profilePath
             NetworkingManager.shared.loadImage(posterPath: profilePath) { [weak self] image in
                 if let image = image {
                     print("Image loaded successfully")

@@ -14,9 +14,22 @@ class MainViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureNavigationBar()
+        // Register cell and set up layout
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
         collectionView.backgroundColor = .white
         fetchMovies()
+    }
+    
+    private func configureNavigationBar() {
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.isTranslucent = false
+        navigationItem.title = "MovieDB" // Set the title
+        let titleAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.black,
+            .font: UIFont.boldSystemFont(ofSize: 24)
+        ]
+        navigationController?.navigationBar.titleTextAttributes = titleAttributes
     }
     
     private func fetchMovies() {
@@ -52,7 +65,6 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 16 // Adjust space between cells as needed
+        return 16 // Spacing between cells 
     }
 }
-
